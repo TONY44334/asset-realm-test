@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #4C1D95 0%, #1E40AF 100%);
+}
+
+.card-hover {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+}
+
+.neon-border {
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #4f46e5; /* indigo-600 */
+  top: 40%;
+  transform: translateY(-50%);
+}
+/* Sparkle shimmer stays the same */
+/* Typewriter with char-length instead of width: 100% */
+/* Typewriter effect for text */
+/* Typewriter effect for text */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+/* Animation for shimmer (sparkle effect) */
+@keyframes shimmer {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.sparkle-text {
+  background: linear-gradient(90deg, #fff 0%, #a855f7 40%, #06b6d4 60%, #fff 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 1s linear infinite;
+}
+
+/* Typewriter Wrapper Styles */
+.typewriter-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid white; /* Cursor */
+  animation: blink 0.69s step-end infinite; /* Blinking cursor */
+}
+
+/* Class for typewriter animation */
+.typewriter-text {
+  display: inline-block;
+  animation: typewriter 1s steps(1) forwards; /* Steps based on the word's length */
+}

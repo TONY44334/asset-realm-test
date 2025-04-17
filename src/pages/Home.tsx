@@ -6,22 +6,37 @@ import { Box,Palette,Map,Download,Users,Shield,Clock } from 'lucide-react';
 import ASSETS_DATA from './AssetData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import Loader from '../components/Loader';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const Home: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const heroText = ["Craft.", "Create.", "Conquer."];
+  const latestAssets = ASSETS_DATA.slice(0, 8);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % heroText.length);
     }, 1800);
+
     return () => clearInterval(interval);
   }, []);
-  const latestAssets = ASSETS_DATA.slice(0, 8);
+
+  if (loading) return <Loader />;
+
+  //const latestAssets = ASSETS_DATA.slice(0, 8);
   return (
     <div  className="font-[Orbitron]">
       {/* Hero Section */}
@@ -49,15 +64,30 @@ const Home: React.FC = () => {
           <p className="text-xl sm:text-2xl mb-6 text-gray-300">
             Hand-picked assets and tools trusted by thousands of creators worldwide
           </p>
-
           <div className="mt-8">
-            <Link
-              to="/store"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-lg text-white font-semibold text-lg transition-all transform hover:scale-105 shadow-lg"
-            >
-              🚀 Browse Assets
-            </Link>
-          </div>
+  <Link
+    to="/store"
+    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-full text-white font-semibold text-lg tracking-wide transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl ring-2 ring-purple-700 ring-opacity-50 hover:ring-4"
+  >
+    <motion.span
+      className="mr-3 text-2xl"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
+    >
+      🚀
+    </motion.span>
+    <motion.span
+      initial={{ y: '20px', opacity: 0 }}
+      animate={{ y: '0', opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.6 }}
+      className="text-lg sm:text-xl"
+    >
+      Browse Assets
+    </motion.span>
+  </Link>
+</div>
+
         </div>
       </header>
       {/* Featured Categories */}
@@ -216,6 +246,48 @@ const Home: React.FC = () => {
           ))}
         </div>
       </section>
+      {/* FAQ Section */}
+<section className="py-20 bg-[#0a0a17] text-white">
+  <div className="max-w-5xl mx-auto px-4">
+    <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-purple-400">
+      🎮 Frequently Asked Questions
+    </h2>
+    <div className="space-y-6">
+      {[
+        {
+          question: 'Can I use these assets in commercial games?',
+          answer:
+            'Absolutely. All assets come with a commercial license, so you can use them in both personal and commercial projects without any worries.',
+        },
+        {
+          question: 'Are the assets compatible with Unity and Unreal Engine?',
+          answer:
+            'Yes! Most assets are engine-agnostic and come in standard formats like FBX, PNG, WAV, etc. Check individual asset pages for specifics.',
+        },
+        {
+          question: 'How often do you update the library?',
+          answer:
+            'New assets are added weekly. We’re constantly scouting and curating top-tier content to keep your toolkit fresh.',
+        },
+        {
+          question: 'Do I need an account to download assets?',
+          answer:
+            'Yes, creating a free account allows you to track your downloads, receive updates, and get access to exclusive content.',
+        },
+      ].map((item, idx) => (
+        <div
+          key={idx}
+          className="border border-purple-800 rounded-lg p-6 hover:border-cyan-500 transition duration-300 bg-[#121222]"
+        >
+          <h3 className="text-lg sm:text-xl font-semibold text-cyan-400 mb-2">
+            {item.question}
+          </h3>
+          <p className="text-gray-300">{item.answer}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
     </div>
   );
 };

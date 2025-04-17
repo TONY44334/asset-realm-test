@@ -7,26 +7,36 @@ import Store from './pages/Store';
 import AssetDetails from './pages/AssetDetails';
 import Categories from './pages/Categories';
 import ScrollToTop from './components/ScrollToTop';
-import './index.css'; // or your CSS file location
+import TermsOfService from './pages/TermsOfService';
+import AboutUs from './pages/AboutUs';
+import Careers from './pages/Careers';
+import CartPage from './pages/CartPage'; // ✅ New Cart Page
+import { CartProvider } from './components/CartContext';
+import './index.css'; // Custom styles
 
 function App() {
   return (
-    <Router>
-      {/* This makes sure scroll resets on route change */}
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/asset/:id" element={<AssetDetails />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col bg-[#0a0a17] text-white">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/asset/:id" element={<AssetDetails />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/cart" element={<CartPage />} /> {/* ✅ Route for Cart */}
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

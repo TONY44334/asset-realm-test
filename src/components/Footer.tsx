@@ -1,4 +1,5 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Github, Twitter, Facebook } from 'lucide-react';
 
 const Footer = () => {
@@ -8,24 +9,24 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold text-white mb-4 font-[Orbitron]">⚔️ AssetRealm</h3>
-            <p className="text-gray-400">Your one-stop shop for premium game assets.</p>
+            <p className="text-gray-400"> Bravyn Studios is a marketplace for high quality, affordable game assets handcrafted by talented creators from all around the world.</p>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-white mb-4">Discover</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-purple-500">About Us</a></li>
-              <li><a href="#" className="hover:text-purple-500">Contact</a></li>
-              <li><a href="#" className="hover:text-purple-500">FAQ</a></li>
-              <li><a href="#" className="hover:text-purple-500">Terms of Service</a></li>
+            <li><Link to="/terms" className="hover:text-purple-500">Terms of Service</Link></li>
+            <li><Link to="/about-us" className="hover:text-purple-500">About Us</Link></li>
+              <li><a href="/" className="hover:text-purple-500">Contact</a></li>
+              <li><Link to="/careers" className="hover:text-purple-500">Careers</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Categories</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-purple-500">3D Models</a></li>
-              <li><a href="#" className="hover:text-purple-500">Textures</a></li>
-              <li><a href="#" className="hover:text-purple-500">Sound Effects</a></li>
-              <li><a href="#" className="hover:text-purple-500">Animations</a></li>
+            <li><Link to="/store" className="hover:text-purple-500">3D Models</Link></li>
+            <li><Link to="/store" className="hover:text-purple-500">Textures</Link></li>
+            <li><Link to="/store" className="hover:text-purple-500">Sound Effects</Link></li>
+            <li><Link to="/store" className="hover:text-purple-500">Animations</Link></li>
             </ul>
           </div>
           <div>
@@ -44,7 +45,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>&copy; 2025 Assets Realm. All rights reserved.</p>
+          <p>&copy; 2025 Bravyn Studios. All rights reserved.</p>
         </div>
       </div>
     </footer>

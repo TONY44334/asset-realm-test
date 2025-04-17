@@ -1,7 +1,9 @@
-// CartContext.tsx
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { db } from '../firebase';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../AuthContext';
 
-// Define the structure of a cart item
+// Cart item type
 interface CartItem {
   id: string;
   title: string;
@@ -10,7 +12,7 @@ interface CartItem {
   image: string;
 }
 
-// Define the cart context type
+// Context type
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
@@ -18,40 +20,81 @@ interface CartContextType {
   clearCart: () => void;
 }
 
+// Context setup
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// Create a custom hook for easy access to the Cart context
+// Custom hook
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
+  if (!context) throw new Error('useCart must be used within a CartProvider');
   return context;
 };
 
-// CartProvider component to wrap around your app
+// Cart provider
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { currentUser } = useAuth();
 
-  // Add an item to the cart
+  
+  useEffect(() => {
+    const fetchCart = async () => {
+      if (!currentUser) return;
+      try {
+        const userRef = doc(db, 'users', currentUser.uid);
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data?.CartItems) {
+            setCartItems(data.CartItems);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading cart:', error);
+      }
+    };
+
+    if (currentUser) {
+      fetchCart();
+    } else {
+      setCartItems([]); // Clear if no user
+    }
+  }, [currentUser]);
+
+  
+  useEffect(() => {
+    const saveCart = async () => {
+      if (!currentUser) return;
+      try {
+        const userRef = doc(db, 'users', currentUser.uid);
+        await setDoc(userRef, { CartItems: cartItems }, { merge: true }); // merge to avoid overwriting
+      } catch (error) {
+        console.error('Error saving cart:', error);
+      }
+    };
+
+    const timeout = setTimeout(saveCart, 800);
+    return () => clearTimeout(timeout);
+  }, [cartItems, currentUser]);
+
+  // ➕ Add item
   const addToCart = (item: CartItem) => {
-    setCartItems((prevItems) => {
-      const itemExists = prevItems.find((i) => i.id === item.id);
-      if (itemExists) {
-        return prevItems.map((i) =>
+    setCartItems((prev) => {
+      const existing = prev.find((i) => i.id === item.id);
+      if (existing) {
+        return prev.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
         );
       }
-      return [...prevItems, item];
+      return [...prev, item];
     });
   };
 
-  // Remove an item from the cart
+ 
   const removeFromCart = (id: string) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Clear all items from the cart
+ 
   const clearCart = () => {
     setCartItems([]);
   };

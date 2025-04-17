@@ -1,10 +1,25 @@
 import { useCart } from '../components/CartContext';
 import { Link } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+  
+  // States for managing loading and error
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  const handleProceedToCheckout = () => {
+    setIsLoading(true); // Start loading
+
+    // Simulate loading for 10 seconds
+    setTimeout(() => {
+      setIsLoading(false); // Stop loading
+      setHasError(true); // Show fatal error after 10s
+    }, 10000); // 10000ms = 10 seconds
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16 text-white">
@@ -69,12 +84,34 @@ const CartPage = () => {
               Clear Cart
             </button>
             <button
+              onClick={handleProceedToCheckout}
               className="px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white rounded-lg font-semibold transition transform hover:scale-105"
             >
               Proceed to Checkout
             </button>
           </div>
         </>
+      )}
+
+      {/* Show loading page with fun loader if in loading state */}
+      {isLoading && (
+        <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-white">
+          <div className="text-center">
+            <div className="spinner"></div>
+            <h2 className="text-3xl font-extrabold mt-6">Processing Checkout...</h2>
+            <p className="mt-4 text-lg">Please wait, we're processing your order.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Show error message if there's a fatal error */}
+      {hasError && (
+        <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-white">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-red-500">Fatal Error</h2>
+            <p className="mt-4 text-lg">Something went wrong. Please try again later.</p>
+          </div>
+        </div>
       )}
     </div>
   );

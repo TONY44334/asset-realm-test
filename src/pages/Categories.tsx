@@ -1,5 +1,6 @@
-import React from 'react';
 import { Box, Palette, Map, Music, Film, Code } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const CATEGORIES = [
   {
@@ -41,6 +42,16 @@ const CATEGORIES = [
 ];
 
 const Categories = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' }); 
+    }, []);
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryName: string) => {
+    // Optional: you could pass categoryName via query params like ?category=3D Models
+    navigate('/store');
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold mb-8">Asset Categories</h1>
@@ -49,17 +60,19 @@ const Categories = () => {
         {CATEGORIES.map((category) => {
           const IconComponent = category.icon;
           return (
-            <div key={category.name} className="bg-gray-800 rounded-lg p-6 neon-border card-hover">
+            <button
+              key={category.name}
+              onClick={() => handleCategoryClick(category.name)}
+              className="text-left w-full bg-gray-800 rounded-lg p-6 neon-border card-hover transition hover:scale-[1.02] duration-200"
+            >
               <IconComponent className="h-12 w-12 text-purple-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">{category.name}</h2>
               <p className="text-gray-400 mb-4">{category.description}</p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-400">{category.count} assets</span>
-                <button className="text-purple-500 hover:text-purple-400">
-                  Browse →
-                </button>
+                <span className="text-purple-500 hover:text-purple-400">Browse →</span>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

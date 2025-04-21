@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartItems } = useCart();
   const location = useLocation();
-  const { currentUser } = useAuth(); // ✅ Now inside the component
+  const { currentUser } = useAuth();
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -39,9 +39,19 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-2">
-                <span className="text-2xl font-extrabold text-purple-400 tracking-wider font-[Orbitron]">
-                  ⚔️ AssetRealm
+              <Link to="/" className="flex items-center space-x-3 group">
+                <img
+                  src="https://i.imgur.com/36STGV9.png"
+                  alt="Bravyn Studios Logo"
+                  className="h-10 sm:h-12 w-auto drop-shadow-lg transition-transform duration-300 group-hover:scale-105 pointer-events-none select-none"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+                <span
+                  className="text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent tracking-wide transition duration-300 group-hover:brightness-125"
+                  style={{ fontFamily: "'Audiowide', sans-serif" }}
+                >
+                  Bravyn Studios
                 </span>
               </Link>
             </div>
@@ -100,9 +110,13 @@ const Navbar = () => {
             <div className="md:hidden flex items-center">
               <button
                 onClick={toggleMenu}
-                className="text-purple-400 hover:text-purple-300 transition"
+                className="text-purple-400 hover:text-purple-300 transition relative group"
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? (
+                  <X className="h-6 w-6 group-hover:scale-110 transition duration-300" />
+                ) : (
+                  <Menu className="h-6 w-6 group-hover:scale-110 transition duration-300" />
+                )}
               </button>
             </div>
           </div>
@@ -110,7 +124,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden backdrop-blur bg-gray-900/80 shadow-lg">
+          <div className="md:hidden backdrop-blur bg-gray-900/80 shadow-lg transition-transform duration-300">
             <div className="px-4 pt-4 pb-2 space-y-2">
               <Link
                 to="/"

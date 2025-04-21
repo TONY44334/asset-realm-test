@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4 font-[Orbitron]">⚔️ AssetRealm</h3>
+            <h3 className="text-lg font-semibold text-white mb-4 font-[Orbitron]">&copy; Bravyn Studios</h3>
             <p className="text-gray-400"> Bravyn Studios is a marketplace for high quality, affordable game assets handcrafted by talented creators from all around the world.</p>
           </div>
           <div>

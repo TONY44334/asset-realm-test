@@ -8,7 +8,7 @@ const Store = () => {
   const [sortBy, setSortBy] = useState('featured');
   const [filterCategory, setFilterCategory] = useState('all');
 
-  const categories = ['all', '3D Models', '2D Assets', 'Environments'];
+  const categories = ['all', '3D Models', '2D Assets', 'Environments', 'VFX'];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">

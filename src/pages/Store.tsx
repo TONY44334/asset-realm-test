@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Filter, SortAsc, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import ASSETS_DATA from './AssetData.ts';
 import LazyImage from '../components/LazyImage';
 
@@ -67,7 +67,7 @@ const Store = () => {
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute top-2 right-2 bg-purple-600 text-white px-2 py-1 rounded text-sm">
-                    ${asset.price}
+                  ₹{Math.ceil(asset.price *85.30)}
                   </div>
                 </div>
                 <div className="p-4">

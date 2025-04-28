@@ -15,7 +15,7 @@ import { AuthProvider } from './AuthContext';
 import { CartProvider } from './components/CartContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './pages/Profile';
-import './index.css'; // Custom styles
+import './index.css';
 
 function App() {
   return (

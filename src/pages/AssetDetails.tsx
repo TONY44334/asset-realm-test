@@ -67,7 +67,7 @@ const AssetDetails = () => {
     addToCart({
       id: asset.id.toString(),
       title: asset.title,
-      price: asset.price,
+      price: Math.ceil(asset.price *85.30),
       image: asset.image,
       quantity: 1,
     });
@@ -114,11 +114,12 @@ const AssetDetails = () => {
         {/* Image Gallery */}
         <div>
           <div className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 shadow-lg">
-            <LazyImage
-              src={asset.images[selectedImage]}
-              alt={asset.title}
-              className="w-full h-[300px] sm:h-[400px] object-cover transition-all duration-300"
-            />
+          <LazyImage
+  src={asset.images[selectedImage]}
+  alt={asset.title}
+  className="w-full h-[300px] sm:h-[400px] object-cover transition-all duration-300 pointer-events-none select-none"
+/>
+
           </div>
 
           <div className="grid grid-cols-4 gap-3 mt-4">
@@ -132,7 +133,12 @@ const AssetDetails = () => {
                     : 'border-gray-700 opacity-70 hover:opacity-100'
                 }`}
               >
-                <LazyImage src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-20 object-cover" />
+               <LazyImage
+  src={img}
+  alt={`Thumbnail ${i + 1}`}
+  className="w-full h-20 object-cover pointer-events-none select-none"
+/>
+
               </button>
             ))}
           </div>
@@ -161,7 +167,7 @@ const AssetDetails = () => {
 
               {/* Share Button */}
               <a
-                href={`mailto:?subject=Check out this asset: ${asset.title}&body=Hey! Check out this awesome asset I found on CoolAssets.%0D%0A%0D%0ATitle: ${asset.title}%0D%0APrice: $${asset.price}%0D%0ALink: ${window.location.origin}/assets/${asset.id}`}
+                href={`mailto:?subject=Check out this asset: ${asset.title}&body=Hey! Check out this awesome asset I found on CoolAssets.%0D%0A%0D%0ATitle: ${asset.title}%0D%0APrice: ₹${asset.price}%0D%0ALink: ${window.location.origin}/assets/${asset.id}`}
                 className="p-2 bg-gray-800 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors duration-200"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -189,7 +195,7 @@ const AssetDetails = () => {
 
           <div className="bg-gray-900 border border-gray-700 rounded-xl p-6">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-              <span className="text-3xl font-bold text-purple-400">${asset.price}</span>
+              <span className="text-3xl font-bold text-purple-400">₹{Math.ceil(asset.price *85.30)}</span>
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <button
                   onClick={handleAddToCart}

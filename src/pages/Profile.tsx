@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
           console.error('Error fetching user data:', err);
         } finally {
           setLoading(false);
-          setIsDataLoaded(true); // Flag for when user data is fully loaded
+          setIsDataLoaded(true); 
         }
       }
     };

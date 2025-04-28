@@ -16,7 +16,7 @@ const AboutUs = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          🎮 Welcome to Bravyn Studios
+          🎮 Welcome to <span className='font-[Audiowide] font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent tracking-wide transition duration-300 group-hover:brightness-125'>Bravyn Studios</span>
         </motion.h1>
         <p className="mt-4 text-gray-300 text-lg max-w-2xl mx-auto">
           Where innovation meets immersion. We're building the ultimate ecosystem for indie developers and creative minds in the gaming universe.

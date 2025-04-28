@@ -71,7 +71,7 @@ const AuthForm: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a0a17] to-black px-4">
       <div className="w-full max-w-md bg-[#111122] border border-purple-800 rounded-xl shadow-2xl p-8 relative">
         <h2 className="text-3xl font-[Orbitron] font-bold text-purple-400 text-center mb-6 tracking-wide">
-          {isLogin ? 'Welcome Back' : 'Join AssetRealm'}
+          {isLogin ? 'Welcome Back' : 'Sign Up'}
         </h2>
 
        

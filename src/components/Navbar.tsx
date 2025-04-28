@@ -210,7 +210,7 @@ const Navbar = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-white">{item.title}</h3>
                       <p className="text-sm text-gray-400">
-                        ${item.price} × {item.quantity}
+                      ₹{item.price} × {item.quantity}
                       </p>
                     </div>
                   </li>

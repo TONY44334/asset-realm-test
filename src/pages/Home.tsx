@@ -34,7 +34,8 @@ const Home: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader onFinish={() => setLoading(false)} />;
+
 
   //const latestAssets = ASSETS_DATA.slice(0, 8);
   return (
@@ -65,29 +66,28 @@ const Home: React.FC = () => {
             Hand-picked assets and tools trusted by thousands of creators worldwide
           </p>
           <div className="mt-8">
-  <Link
-    to="/store"
-    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-full text-white font-semibold text-lg tracking-wide transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl ring-2 ring-purple-700 ring-opacity-50 hover:ring-4"
-  >
-    <motion.span
-      className="mr-3 text-2xl"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.3, duration: 0.6 }}
-    >
-      🚀
-    </motion.span>
-    <motion.span
-      initial={{ y: '20px', opacity: 0 }}
-      animate={{ y: '0', opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.6 }}
-      className="text-lg sm:text-xl"
-    >
-      Browse Assets
-    </motion.span>
-  </Link>
-</div>
-
+            <Link
+              to="/store"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-full text-white font-semibold text-lg tracking-wide transition-all transform hover:scale-110 shadow-xl hover:shadow-2xl ring-2 ring-purple-700 ring-opacity-50 hover:ring-4"
+            >
+              <motion.span
+                className="mr-3 text-2xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                🚀
+              </motion.span>
+              <motion.span
+                initial={{ y: '20px', opacity: 0 }}
+                animate={{ y: '0', opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="text-lg sm:text-xl"
+              >
+                Browse Assets
+              </motion.span>
+            </Link>
+          </div>
         </div>
       </header>
       {/* Featured Categories */}

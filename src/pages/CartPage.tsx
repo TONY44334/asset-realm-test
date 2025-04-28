@@ -18,7 +18,7 @@ const CartPage = () => {
     setTimeout(() => {
       setIsLoading(false); // Stop loading
       setHasError(true); // Show fatal error after 10s
-    }, 10000); // 10000ms = 10 seconds
+    }, 12000); // 10000ms = 10 seconds
   };
 
   return (
@@ -52,7 +52,7 @@ const CartPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold">{item.title}</h3>
                     <p className="text-sm text-gray-400">
-                      ${item.price} × {item.quantity}
+                    ₹{item.price} × {item.quantity}
                     </p>
                   </div>
                 </div>
@@ -72,7 +72,7 @@ const CartPage = () => {
           {/* Total */}
           <div className="flex justify-between items-center text-lg font-medium mb-8">
             <span>Total:</span>
-            <span className="font-bold text-cyan-400 text-xl">${total}</span>
+            <span className="font-bold text-cyan-400 text-xl">₹{total}</span>
           </div>
 
           {/* Buttons */}

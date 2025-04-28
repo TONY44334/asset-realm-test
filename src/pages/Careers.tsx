@@ -207,15 +207,10 @@ const Careers: React.FC = () => {
         <motion.h2 className="text-3xl font-bold mb-4">
           Ready to Join Us?
         </motion.h2>
-        <p className="text-xl mb-8 text-gray-300">
+        <p className="text-xl mb-10 text-gray-300">
           Even if there aren't current openings, send us your resume and let’s connect for future opportunities!
         </p>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-[#0f0f1c] py-12 text-center text-gray-400">
-        &copy; 2025 Bravyn Studios. All Rights Reserved.
-      </footer>
     </div>
   );
 };
